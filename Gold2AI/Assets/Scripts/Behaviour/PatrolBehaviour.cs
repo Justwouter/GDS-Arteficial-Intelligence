@@ -2,7 +2,7 @@ using System.Collections;
 
 using UnityEngine;
 
-public class PatrolBehaviour : MonoBehaviour {
+public class PatrolBehaviour : Behaviour {
     [Header("Movement")]
     [SerializeField] private float speed;
     [SerializeField] private float restTime;
@@ -12,8 +12,13 @@ public class PatrolBehaviour : MonoBehaviour {
     private int routeIndex = 0;
     private bool isResting = false;
 
+    public PatrolBehaviour(float speed, float restTime, Transform[] route) {
+        this.speed = speed;
+        this.restTime = restTime;
+        this.route = route;
+    }
 
-    void Update() {
+    public override void Update() {
         if (transform.position != route[routeIndex].position) {
             transform.position = Vector3.MoveTowards(transform.position, route[routeIndex].position, speed * Time.deltaTime);
         }

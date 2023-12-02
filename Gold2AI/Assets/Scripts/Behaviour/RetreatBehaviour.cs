@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-public class RetreatBehaviour : MonoBehaviour {
+public class RetreatBehaviour : Behaviour {
     [Header("To Chase")]
     [SerializeField] private Transform target;
 
@@ -12,11 +12,18 @@ public class RetreatBehaviour : MonoBehaviour {
     [SerializeField] private float minimumDistance;
     [SerializeField] private bool shouldRetreat = true;
 
+    public RetreatBehaviour(Transform target, float speed, float minimumDistance, bool shouldRetreat) {
+        this.target = target;
+        this.speed = speed;
+        this.minimumDistance = minimumDistance;
+        this.shouldRetreat = shouldRetreat;
+    }
+
     void Start() {
 
     }
 
-    void Update() {
+    public override void Update() {
         if (shouldRetreat && Vector3.Distance(transform.position, target.position) < minimumDistance) {
             transform.position = Vector3.MoveTowards(
             transform.position,
