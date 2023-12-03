@@ -19,7 +19,6 @@ public class EnemyAI : MonoBehaviour {
 
 
     private Material material;
-    private Transform bestCoverSpot;
     private NavMeshAgent agent;
 
     private Node topNode;
@@ -29,6 +28,7 @@ public class EnemyAI : MonoBehaviour {
         get { return currentHealth; }
         set { currentHealth = Mathf.Clamp(value, 0, startingHealth); }
     }
+
 
     private void Awake() {
         agent = GetComponent<NavMeshAgent>();
@@ -41,27 +41,33 @@ public class EnemyAI : MonoBehaviour {
     }
 
     private void ConstructBehahaviourTree() {
+        // Helper
+        HealthNode healthNode = new(this, lowHealthThreshold);
 
         // Retreat!
-        HealthNode healthNode = new(this, lowHealthThreshold);
-        RangeNode runningRangeNode = new( runRange, playerTransform, transform);
+        RangeNode runningRangeNode = new(runRange, playerTransform, transform);
         RunNode runNode = new(playerTransform, runRange, agent, this);
 
         // Chase
         RangeNode chasingRangeNode = new(chasingRange, playerTransform, transform);
         ChaseNode chaseNode = new(playerTransform, agent, this);
-        
+
         // "Shoot"
         RangeNode shootingRangeNode = new(shootingRange, playerTransform, transform);
         ShootNode shootNode = new(agent, this, playerTransform);
 
+        // Healing
+        HealNode healNode = new(playerTransform, healthRestoreRate, agent, this);
 
+        // Patrolling
 
-        Sequence runSequence = new(new() {healthNode, runningRangeNode, runNode });
-        Sequence chaseSequence = new(new() { chasingRangeNode, chaseNode });
+        Sequence runSequence = new(new() { healthNode, runningRangeNode, runNode });
+        Sequence healSequence = new(new(){healthNode, healNode});
         Sequence shootSequence = new(new() { shootingRangeNode, shootNode });
+        Sequence chaseSequence = new(new() { chasingRangeNode, chaseNode });
+        
 
-        topNode = new Selector(new() {runSequence, shootSequence, chaseSequence });
+        topNode = new Selector(new() { runSequence, healSequence, shootSequence, chaseSequence });
     }
 
 
@@ -71,25 +77,19 @@ public class EnemyAI : MonoBehaviour {
             SetColor(Color.red);
             agent.isStopped = true;
         }
-        // currentHealth += Time.deltaTime * healthRestoreRate;
     }
 
 
-    public void TakeDamage(float damage) {
-        currentHealth -= damage;
+    public void ApplyDamage(float damage) {
+        CurrentHealth -= damage;
+    }
+
+    public void ApplyHeal(float heal) {
+        CurrentHealth += heal;
     }
 
     public void SetColor(Color color) {
         material.color = color;
     }
-
-    public void SetBestCoverSpot(Transform bestCoverSpot) {
-        this.bestCoverSpot = bestCoverSpot;
-    }
-
-    public Transform GetBestCoverSpot() {
-        return bestCoverSpot;
-    }
-
 
 }

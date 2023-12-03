@@ -21,7 +21,7 @@ public class Shooting : MonoBehaviour {
     private void Shoot() {
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, mask)) {
             if (hit.collider.TryGetComponent<EnemyAI>(out var ai)) {
-                ai.TakeDamage(damage);
+                ai.ApplyDamage(damage);
                 Debug.Log(ai.CurrentHealth);
             }
         }
