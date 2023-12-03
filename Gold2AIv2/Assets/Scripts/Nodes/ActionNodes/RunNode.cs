@@ -20,7 +20,7 @@ public class RunNode : Node {
     public override NodeState Evaluate() {
         ai.SetColor(Color.blue);
         float distance = Vector3.Distance(agent.transform.position, target.position);
-        Debug.Log(distance + " " + minimumDistance);
+        // Debug.Log(distance + " " + minimumDistance);
 
         if (distance < minimumDistance) {
             Debug.Log("I work!");

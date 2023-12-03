@@ -12,7 +12,7 @@ public class ShootNode : Node {
     private Vector3 currentVelocity;
     private float smoothDamp;
 
-    public ShootNode(NavMeshAgent agent, EnemyAI ai, Transform target) {
+    public ShootNode(NavMeshAgent agent, Transform target, EnemyAI ai) {
         this.agent = agent;
         this.ai = ai;
         this.target = target;

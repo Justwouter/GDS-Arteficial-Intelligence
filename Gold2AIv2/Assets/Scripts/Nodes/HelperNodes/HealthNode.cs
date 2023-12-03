@@ -7,7 +7,7 @@ public class HealthNode : Node {
     private EnemyAI ai;
     private float threshold;
 
-    public HealthNode(EnemyAI ai, float threshold) {
+    public HealthNode(float threshold, EnemyAI ai) {
         this.ai = ai;
         this.threshold = threshold;
     }

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿
 
 using UnityEngine;
 using UnityEngine.AI;
@@ -42,7 +40,7 @@ public class EnemyAI : MonoBehaviour {
 
     private void ConstructBehahaviourTree() {
         // Helper
-        HealthNode healthNode = new(this, lowHealthThreshold);
+        HealthNode healthTresholdNode = new(lowHealthThreshold, this);
 
         // Retreat!
         RangeNode runningRangeNode = new(runRange, playerTransform, transform);
@@ -54,20 +52,31 @@ public class EnemyAI : MonoBehaviour {
 
         // "Shoot"
         RangeNode shootingRangeNode = new(shootingRange, playerTransform, transform);
-        ShootNode shootNode = new(agent, this, playerTransform);
+        ShootNode shootNode = new(agent, playerTransform, this);
 
         // Healing
         HealNode healNode = new(playerTransform, healthRestoreRate, agent, this);
 
         // Patrolling
+        Inverter rangeInverter = new(chasingRangeNode);
+        PatrolNode patrolNode = new(agent, 20f, 1f, this);
 
-        Sequence runSequence = new(new() { healthNode, runningRangeNode, runNode });
-        Sequence healSequence = new(new(){healthNode, healNode});
+        // Death
+        HealthNode healthDeathNode = new(0.1f, this);
+        DeathNode deathNote = new(this); // ;)
+
+
+        // Sequence nodes
+        Sequence runSequence = new(new() { healthTresholdNode, runningRangeNode, runNode });
+        Sequence healSequence = new(new() { healthTresholdNode, healNode });
         Sequence shootSequence = new(new() { shootingRangeNode, shootNode });
         Sequence chaseSequence = new(new() { chasingRangeNode, chaseNode });
-        
+        Sequence patrolSequence = new(new() { rangeInverter, patrolNode });
+        Sequence deathSequence = new(new() { healthDeathNode, deathNote});
 
-        topNode = new Selector(new() { runSequence, healSequence, shootSequence, chaseSequence });
+        topNode = new Selector(new() {deathSequence, runSequence, healSequence, shootSequence, chaseSequence, patrolSequence });
+        // topNode = new Selector(new() { });
+
     }
 
 
