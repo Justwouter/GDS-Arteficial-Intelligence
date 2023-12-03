@@ -986,7 +986,9 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 256
+  bullet: {fileID: 3109044000699980872, guid: 7af9f199fbeb9754c837b1e3c3d38916, type: 3}
   damage: 25
+  projectileSpeed: 100
 --- !u!1 &1033396857
 GameObject:
   m_ObjectHideFlags: 0
