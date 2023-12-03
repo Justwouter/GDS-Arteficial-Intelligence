@@ -18,9 +18,6 @@ public class FollowBehaviour : Behaviour {
         this.minimumDistance = minimumDistance;
     }
 
-    void Start() {
-
-    }
 
     public override void Update() {
         if (shouldChase && Vector3.Distance(transform.position, target.position) > minimumDistance) {
