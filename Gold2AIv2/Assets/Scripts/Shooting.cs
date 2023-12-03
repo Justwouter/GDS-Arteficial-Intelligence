@@ -9,7 +9,7 @@ public class Shooting : MonoBehaviour {
     [SerializeField] private GameObject bullet;
     [SerializeField] private float damage;
     [SerializeField] private float projectileSpeed;
-    
+
     public float Damage { get { return damage; } }
 
 

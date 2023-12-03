@@ -7,7 +7,7 @@ public class DeathNode : Node {
     public DeathNode(EnemyAI ai) {
         this.ai = ai;
     }
-    
+
     public override NodeState Evaluate() {
         Object.Destroy(ai.transform.gameObject);
         return NodeState.SUCCESS;

@@ -1,6 +1,4 @@
-﻿
-
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour {
@@ -72,9 +70,9 @@ public class EnemyAI : MonoBehaviour {
         Sequence shootSequence = new(new() { shootingRangeNode, shootNode });
         Sequence chaseSequence = new(new() { chasingRangeNode, chaseNode });
         Sequence patrolSequence = new(new() { rangeInverter, patrolNode });
-        Sequence deathSequence = new(new() { healthDeathNode, deathNote});
+        Sequence deathSequence = new(new() { healthDeathNode, deathNote });
 
-        topNode = new Selector(new() {deathSequence, runSequence, healSequence, shootSequence, chaseSequence, patrolSequence });
+        topNode = new Selector(new() { deathSequence, runSequence, healSequence, shootSequence, chaseSequence, patrolSequence });
         // topNode = new Selector(new() { });
 
     }

@@ -47,7 +47,7 @@ public class PatrolNode : Node {
         }
     }
 
-    IEnumerator PatrolPointSwitchDelay(float delay){
+    IEnumerator PatrolPointSwitchDelay(float delay) {
         yield return new WaitForSeconds(delay);
     }
 

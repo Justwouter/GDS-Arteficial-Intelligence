@@ -18,7 +18,7 @@ public class DirectionFreeNode : Node {
 
 
     public override NodeState Evaluate() {
-        Vector3 randomDirection = new(randomPoint.x,0,randomPoint.y);
+        Vector3 randomDirection = new(randomPoint.x, 0, randomPoint.y);
 
         Ray ray = new(ai.transform.position, randomDirection);
         Debug.DrawRay(ray.origin, ray.direction * distanceToPatrol, Color.red, 2f);

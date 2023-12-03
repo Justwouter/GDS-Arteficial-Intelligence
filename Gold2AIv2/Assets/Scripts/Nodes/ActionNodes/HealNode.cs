@@ -20,16 +20,16 @@ public class HealNode : Node {
     public override NodeState Evaluate() {
         ai.SetColor(Color.green);
 
-        if(agent.isStopped){
+        if (agent.isStopped) {
             return NodeState.RUNNING;
         }
-        else{
+        else {
             ai.StartCoroutine(WaitForHeal());
             return NodeState.SUCCESS;
         }
     }
 
-    IEnumerator WaitForHeal(){
+    IEnumerator WaitForHeal() {
         agent.isStopped = true;
         yield return new WaitForSeconds(1f);
         ai.ApplyHeal(healRate);
