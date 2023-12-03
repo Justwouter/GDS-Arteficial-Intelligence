@@ -83,7 +83,7 @@ public class EnemyAI : MonoBehaviour {
     private void Update() {
         topNode.Evaluate();
         if (topNode.NodeState == NodeState.FAILURE) {
-            SetColor(Color.red);
+            SetColor(Color.magenta);
             agent.isStopped = true;
         }
     }

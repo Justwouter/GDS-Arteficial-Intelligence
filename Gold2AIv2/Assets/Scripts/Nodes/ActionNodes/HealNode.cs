@@ -9,7 +9,6 @@ public class HealNode : Node {
     private EnemyAI ai;
     private Transform target;
     private float healRate;
-    private bool healHasStarted = false;
 
     public HealNode(Transform target, float healRate, NavMeshAgent agent, EnemyAI ai) {
         this.target = target;
@@ -21,24 +20,20 @@ public class HealNode : Node {
     public override NodeState Evaluate() {
         ai.SetColor(Color.green);
 
-        if(healHasStarted){
+        if(agent.isStopped){
             return NodeState.RUNNING;
         }
         else{
             ai.StartCoroutine(WaitForHeal());
             return NodeState.SUCCESS;
         }
-        
-        
-        
-        
     }
 
     IEnumerator WaitForHeal(){
-        healHasStarted = true;
+        agent.isStopped = true;
         yield return new WaitForSeconds(1f);
         ai.ApplyHeal(healRate);
-        healHasStarted = false;
+        agent.isStopped = false;
     }
 
 
