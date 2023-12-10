@@ -3,16 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class RegularBehaviour : MonoBehaviour {
-
-    [Header("Movement")]
-    [SerializeField] private float speed;
-    [SerializeField] private bool isActive = false;
-
-    [Header("Route")]
-    [SerializeField] private PatrolPoint target;
-
-    private NavMeshAgent agent;
+public class RegularBehaviour : ABehaviour {
 
     private void Start() {
         agent = GetComponent<NavMeshAgent>();
@@ -25,15 +16,7 @@ public class RegularBehaviour : MonoBehaviour {
         }
     }
 
-    public void SetEnabled() {
-        isActive = true;
-        agent.enabled = true;
-    }
-
-    public void SetDisabled() {
-        isActive = false;
-        agent.enabled = false;
-    }
+    
 
 
     /// <summary>

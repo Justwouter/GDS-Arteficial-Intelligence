@@ -3,19 +3,10 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class PatrolBehaviour : MonoBehaviour {
-    [Header("Movement")]
-    [SerializeField] private float speed;
-    [SerializeField] private float restTime;
-    [SerializeField] private bool isActive = false;
-
-    [Header("Route")]
-    [SerializeField] private PatrolPoint[] route;
-
-
+public class PatrolBehaviour : ABehaviour {
+  
     private int routeIndex = 0;
     private bool isResting = false;
-    private NavMeshAgent agent;
 
     private void Start() {
         agent = GetComponent<NavMeshAgent>();
@@ -47,18 +38,7 @@ public class PatrolBehaviour : MonoBehaviour {
         }
         isResting = false;
     }
-
-
-    public void SetEnabled() {
-        isActive = true;
-        agent.enabled = true;
-    }
-
-    public void SetDisabled() {
-        isActive = false;
-        agent.enabled = false;
-    }
-
+    
 
     /// <summary>
     /// Quick and stupid way to ignore hight values when comparing vectors
