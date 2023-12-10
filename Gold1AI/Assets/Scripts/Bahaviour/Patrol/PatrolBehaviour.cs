@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 
 using UnityEngine;
 using UnityEngine.AI;
@@ -8,6 +7,7 @@ public class PatrolBehaviour : MonoBehaviour {
     [Header("Movement")]
     [SerializeField] private float speed;
     [SerializeField] private float restTime;
+    [SerializeField] private bool isActive = false;
 
     [Header("Route")]
     [SerializeField] private PatrolPoint[] route;
@@ -22,16 +22,18 @@ public class PatrolBehaviour : MonoBehaviour {
     }
 
     public void Update() {
-        Vector3 nextPosition = route[routeIndex].transform.position;
-        if (V3NoY(transform.position) != V3NoY(nextPosition)) {
-            agent.SetDestination(nextPosition);
-        }
-        else {
-            if (!isResting) {
-                StartCoroutine(RestAtPoint());
+        if (isActive) {
+            agent.speed = speed;
+            Vector3 nextPosition = V3NoY(route[routeIndex].transform.position);
+            if (V3NoY(transform.position) != nextPosition) {
+                agent.SetDestination(nextPosition);
+            }
+            else {
+                if (!isResting) {
+                    StartCoroutine(RestAtPoint());
+                }
             }
         }
-
     }
 
     IEnumerator RestAtPoint() {
@@ -46,13 +48,25 @@ public class PatrolBehaviour : MonoBehaviour {
         isResting = false;
     }
 
+
+    public void SetEnabled() {
+        isActive = true;
+        agent.enabled = true;
+    }
+
+    public void SetDisabled() {
+        isActive = false;
+        agent.enabled = false;
+    }
+
+
     /// <summary>
     /// Quick and stupid way to ignore hight values when comparing vectors
     /// </summary>
     /// <param name="inputVector"></param>
     /// <returns></returns>
-    private Vector3 V3NoY(Vector3 inputVector){
-        return new Vector3(inputVector.x,0,inputVector.z);
+    private Vector3 V3NoY(Vector3 inputVector) {
+        return new Vector3(inputVector.x, 1, inputVector.z);
     }
 
     private void OnDrawGizmos() {
