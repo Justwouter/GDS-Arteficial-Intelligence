@@ -13,5 +13,8 @@ public class PatrolPoint : MonoBehaviour {
     private void OnDrawGizmos() {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, .3f);
+        Gizmos.DrawLine(transform.position, new (transform.position.x,-1,transform.position.z));
+        Gizmos.DrawLine(transform.position, new (transform.position.x,100,transform.position.z));
+
     }
 }

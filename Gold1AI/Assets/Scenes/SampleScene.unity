@@ -139,7 +139,7 @@ PrefabInstance:
     - target: {fileID: 6092499008655544048, guid: c9f82fc03d3f0c444bd8eadb5a2bd33a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 6092499008655544048, guid: c9f82fc03d3f0c444bd8eadb5a2bd33a,
         type: 3}
@@ -203,6 +203,7 @@ GameObject:
   - component: {fileID: 330585545}
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
+  - component: {fileID: 330585548}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -328,6 +329,26 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!114 &330585548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 506488c15ebcdd44eb9c8c4742ed3280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentList: []
+  chosenAgent: {fileID: 0}
+  agentLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  floorLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -615,7 +636,7 @@ GameObject:
   - component: {fileID: 966298999}
   m_Layer: 6
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -750,9 +771,9 @@ GameObject:
   - component: {fileID: 988751898}
   - component: {fileID: 988751897}
   - component: {fileID: 988751896}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Regular
-  m_TagString: Untagged
+  m_TagString: Agent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -861,7 +882,7 @@ Transform:
   m_GameObject: {fileID: 988751895}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3, y: 2, z: 0}
+  m_LocalPosition: {x: 3, y: 1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1157,7 +1178,7 @@ PrefabInstance:
     - target: {fileID: 6092499008655544048, guid: c9f82fc03d3f0c444bd8eadb5a2bd33a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 6092499008655544048, guid: c9f82fc03d3f0c444bd8eadb5a2bd33a,
         type: 3}
@@ -1225,7 +1246,7 @@ PrefabInstance:
     - target: {fileID: 6092499008655544048, guid: c9f82fc03d3f0c444bd8eadb5a2bd33a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 6092499008655544048, guid: c9f82fc03d3f0c444bd8eadb5a2bd33a,
         type: 3}
@@ -1553,9 +1574,9 @@ GameObject:
   - component: {fileID: 2115895396}
   - component: {fileID: 2115895395}
   - component: {fileID: 2115895400}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Patroller
-  m_TagString: Untagged
+  m_TagString: Agent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1574,7 +1595,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -1664,7 +1685,7 @@ Transform:
   m_GameObject: {fileID: 2115895394}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1684,11 +1705,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   restTime: 0.2
+  isActive: 1
   route:
   - {fileID: 634367798}
   - {fileID: 1444176014}
   - {fileID: 1054015171}
   - {fileID: 1052280517}
+  target: {fileID: 0}
 --- !u!1001 &5302994465931609067
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1705,7 +1728,7 @@ PrefabInstance:
     - target: {fileID: 6092499008655544048, guid: c9f82fc03d3f0c444bd8eadb5a2bd33a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 17.64
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 6092499008655544048, guid: c9f82fc03d3f0c444bd8eadb5a2bd33a,
         type: 3}

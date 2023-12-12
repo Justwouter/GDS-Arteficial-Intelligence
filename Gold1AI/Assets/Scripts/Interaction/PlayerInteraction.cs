@@ -26,15 +26,23 @@ public class PlayerInteraction : MonoBehaviour {
             // Check for floor hits
             else if (Physics.Raycast(ray, out hit, 1000, floorLayer)) {
                 Debug.Log(hit.transform.gameObject.name);
-
+                HandleNoneSelected();
             }
 
         }
     }
 
     public void HandleAgentSelected(ABehaviour behaviour) {
+        Debug.Log("I WORK! Blood for the Blood god! Skulls for the skull throne");
         behaviour.ToggleEnabled();
         selectedObject = behaviour;
+    }
 
+    public void HandleNoneSelected(){
+        selectedObject = null;
+    }
+
+    public ABehaviour GetSelectedObject(){
+        return selectedObject;
     }
 }

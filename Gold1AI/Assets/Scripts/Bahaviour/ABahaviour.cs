@@ -19,17 +19,22 @@ public abstract class ABehaviour : MonoBehaviour, IBehaviour {
 
 
     public void SetEnabled() {
+        agent.isStopped = false;
         isActive = true;
-        agent.enabled = true;
     }
 
     public void SetDisabled() {
+        agent.isStopped = true;
         isActive = false;
-        agent.enabled = false;
+
     }
 
     public void ToggleEnabled() {
-        isActive = !isActive;
-        agent.enabled = !agent.enabled;
+        if (isActive) {
+            SetDisabled();
+        }
+        else {
+            SetEnabled();
+        }
     }
 }
