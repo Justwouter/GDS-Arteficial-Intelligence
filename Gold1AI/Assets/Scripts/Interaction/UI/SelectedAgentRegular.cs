@@ -13,10 +13,12 @@ public class SelectedAgentRegular : UIElement {
 
     private void OnDisable() {
         firstUpdate = false;
+        gameManager.InSelectionMode = false;
     }
 
     private void Update() {
         if (gameManager != null) {
+            gameManager.InSelectionMode = true;
             agentNameText.text = gameManager.SelectedAgent.name;
 
             if (!firstUpdate | selectedObject != gameManager.SelectedAgent) {
@@ -31,6 +33,7 @@ public class SelectedAgentRegular : UIElement {
                 if (Physics.Raycast(ray, out RaycastHit hit, 1000, floorLayer)) {
                     gameManager.SelectedAgent.GetComponent<ABehaviour>().SetEnabled();
                     gameManager.SelectedAgent.GetComponent<ABehaviour>().SetTarget(hit.point);
+                    cordsText.text = FormatVectorToString(hit.point);
                 }
             }
 
@@ -38,6 +41,7 @@ public class SelectedAgentRegular : UIElement {
     }
 
     public void OnConfirmButtonClicked() {
+        // gameManager.SelectedAgent.GetComponent<ABehaviour>().SetDisabled();
         gameManager.SelectedAgent = null;
     }
 
@@ -45,6 +49,6 @@ public class SelectedAgentRegular : UIElement {
         gameManager.SelectedAgent.name = agentNameText.text;
     }
     private string FormatVectorToString(Vector3 vector) {
-        return $"({vector.x}, {vector.z})";
+        return "(" + vector.x.ToString("0.0") + "," + vector.z.ToString("0.0") + ")";
     }
 }

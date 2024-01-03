@@ -49,6 +49,11 @@ public class SelectedAgentPatroller : UIElement {
         gameManager.SelectedAgent = null;
     }
 
+    public void OnQuitButtonClicked() {
+        gameManager.SelectedAgent.GetComponent<ABehaviour>().ToggleEnabled();
+        gameManager.SelectedAgent = null;
+    }
+
     public void OnNameChange() {
         gameManager.SelectedAgent.name = agentNameText.text;
     }

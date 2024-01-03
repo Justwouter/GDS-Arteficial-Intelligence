@@ -10,6 +10,9 @@ public class RegularBehaviour : ABehaviour {
     }
 
     public new void Update() {
+        if(target == Vector3.zero){
+            SetTarget(V3NoY(transform.position));
+        }
         base.Update();
         if (isActive) {
             agent.speed = speed;
