@@ -9,10 +9,11 @@ public class RegularBehaviour : ABehaviour {
         agent = GetComponent<NavMeshAgent>();
     }
 
-    public void Update() {
+    public new void Update() {
+        base.Update();
         if (isActive) {
             agent.speed = speed;
-            agent.SetDestination(target.transform.position);
+            agent.SetDestination(V3NoY(target));
         }
     }
 

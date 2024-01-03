@@ -1,5 +1,4 @@
 // The whole behaviour thing can arguably be improved with some nice abstraction but it is 3am and I am way to lazy to do that.
-// At least to lazy to do it now while debugging stuff in the editor :/
 
 using UnityEngine;
 using UnityEngine.AI;
@@ -8,15 +7,20 @@ public abstract class ABehaviour : MonoBehaviour {
     [Header("Movement")]
     [SerializeField] protected float speed;
     [SerializeField] protected float restTime;
-    [SerializeField] protected bool isActive = false;
+    [SerializeField] protected bool isActive = true;
 
     [Header("Route")]
     [SerializeField] protected PatrolPoint[] route;
-    [SerializeField] protected PatrolPoint target;
-
+    [SerializeField] protected Vector3 target;
+    protected GameManager gameManager;
 
     protected NavMeshAgent agent;
+    protected Material material;
 
+    protected void Start() {
+        material = GetComponent<MeshRenderer>().material;
+        gameManager = FindAnyObjectByType<GameManager>();
+    }
 
     public void SetEnabled() {
         agent.isStopped = false;
@@ -27,6 +31,15 @@ public abstract class ABehaviour : MonoBehaviour {
         agent.isStopped = true;
         isActive = false;
 
+    }
+    protected void Update() {
+        if(gameManager != null )
+            if (gameManager.SelectedAgent == gameObject) {
+                GetComponent<MeshRenderer>().material = gameManager.SelectedMaterial;
+            }
+            else {
+                GetComponent<MeshRenderer>().material = material;
+            }
     }
 
     public void ToggleEnabled() {
@@ -40,6 +53,17 @@ public abstract class ABehaviour : MonoBehaviour {
 
     public void SetRoute(PatrolPoint[] newRoute) {
         route = newRoute;
+    }
+
+    public PatrolPoint[] GetRoute() {
+        return route;
+    }
+
+    public void SetTarget(Vector3 newTarget) {
+        target = newTarget;
+    }
+    public Vector3 GetTarget() {
+        return target;
     }
 
     /// <summary>

@@ -10,11 +10,15 @@ public class GameManager : MonoBehaviour {
 
     public GameObject CurrentAgentPrefab;
 
-    public GameObject SelectedAgent;
+    public GameObject SelectedAgent = null;
 
-    private void Start() {
+    public Material SelectedMaterial;
+    public bool InSelectionMode = false;
+
+    
+    private void Awake() {
         PatrolPoints = FindObjectsOfType<PatrolPoint>().ToList();
         InterfaceManager = FindAnyObjectByType<InterfaceManager>();
     }
-    
+
 }

@@ -3,16 +3,14 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AgentSpawnerSelector : MonoBehaviour {
+public class AgentSpawnerSelector : UIElement {
     [SerializeField] private TextMeshProUGUI agentNameText;
     [SerializeField] private Button prevButton;
     [SerializeField] private Button nextButton;
-    private GameManager gameManager;
+    
     private int currentAgentIndex = 0;
 
-    private void Start() {
-        gameManager = FindObjectOfType<GameManager>();
-    }
+    
     private void Update() {
         UpdateSelectedAgent();
     }
@@ -41,11 +39,6 @@ public class AgentSpawnerSelector : MonoBehaviour {
     }
 
 
-    public void DisableSelector() {
-        gameObject.SetActive(false);
-    }
-    public void EnableSelector() {
-        gameObject.SetActive(true);
-    }
+    
 
 }
