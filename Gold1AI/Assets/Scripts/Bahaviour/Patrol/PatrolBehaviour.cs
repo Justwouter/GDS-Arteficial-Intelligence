@@ -8,7 +8,7 @@ public class PatrolBehaviour : ABehaviour {
     private int routeIndex = 0;
     private bool isResting = false;
 
-    private void Start() {
+    private void Awake() {
         agent = GetComponent<NavMeshAgent>();
     }
 
@@ -39,15 +39,6 @@ public class PatrolBehaviour : ABehaviour {
         isResting = false;
     }
     
-
-    /// <summary>
-    /// Quick and stupid way to ignore hight values when comparing vectors
-    /// </summary>
-    /// <param name="inputVector"></param>
-    /// <returns></returns>
-    private Vector3 V3NoY(Vector3 inputVector) {
-        return new Vector3(inputVector.x, 1, inputVector.z);
-    }
 
     private void OnDrawGizmos() {
         Gizmos.color = Color.red;

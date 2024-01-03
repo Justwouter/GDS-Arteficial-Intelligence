@@ -4,7 +4,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public abstract class ABehaviour : MonoBehaviour, IBehaviour {
+public abstract class ABehaviour : MonoBehaviour {
     [Header("Movement")]
     [SerializeField] protected float speed;
     [SerializeField] protected float restTime;
@@ -30,6 +30,19 @@ public abstract class ABehaviour : MonoBehaviour, IBehaviour {
 
     public void ToggleEnabled() {
         isActive = !isActive;
-        agent.enabled = !agent.enabled;
+        agent.enabled = isActive;
+    }
+
+    public void SetRoute(PatrolPoint[] newRoute) {
+        route = newRoute;
+    }
+
+    /// <summary>
+    /// Quick and stupid way to ignore hight values when comparing vectors
+    /// </summary>
+    /// <param name="inputVector"></param>
+    /// <returns></returns>
+    public Vector3 V3NoY(Vector3 inputVector) {
+        return new Vector3(inputVector.x, 1, inputVector.z);
     }
 }
