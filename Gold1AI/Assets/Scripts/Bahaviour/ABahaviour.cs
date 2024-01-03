@@ -19,18 +19,23 @@ public abstract class ABehaviour : MonoBehaviour {
 
 
     public void SetEnabled() {
+        agent.isStopped = false;
         isActive = true;
-        agent.enabled = true;
     }
 
     public void SetDisabled() {
+        agent.isStopped = true;
         isActive = false;
-        agent.enabled = false;
+
     }
 
     public void ToggleEnabled() {
-        isActive = !isActive;
-        agent.enabled = isActive;
+        if (isActive) {
+            SetDisabled();
+        }
+        else {
+            SetEnabled();
+        }
     }
 
     public void SetRoute(PatrolPoint[] newRoute) {

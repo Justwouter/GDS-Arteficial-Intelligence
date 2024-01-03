@@ -9,6 +9,7 @@ public class Inverter : Node {
     public Inverter(Node node) {
         this.node = node;
     }
+    
     public override NodeState Evaluate() {
         switch (node.Evaluate()) {
             case NodeState.RUNNING:
